@@ -1,3 +1,5 @@
+![WordPress BoilerStack Image](https://repository-images.githubusercontent.com/158602552/f2109880-6a07-11e9-9178-a3edd95349a9)
+
 # WordPress BoilerStack
 
 A kick starter Wordpress theme development stack. Simple Docker setup with contained phpMyAdmin and Wordpress image + full Gulp workflow and starter theme files.
