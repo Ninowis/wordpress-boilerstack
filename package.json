@@ -1,0 +1,34 @@
+{
+  "name": "wordpress-theme-boilerplate",
+  "version": "1.0.0",
+  "description": "A kick starter Wordpress theme development stack. Simple Docker setup with contained phpMyAdmin + full Gulp workflow and starter theme files.",
+  "main": "index.js",
+  "scripts": {
+    "docker": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:clear": "docker-compose down --volumes",
+    "theme:zip": "gulp zip",
+    "theme:update": "gulp update",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ninowis/wordpress-theme-boilerplate.git"
+  },
+  "keywords": [
+    "wordpress",
+    "docker",
+    "gulp"
+  ],
+  "author": "Guillaume Simonin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Ninowis/wordpress-theme-boilerplate/issues"
+  },
+  "homepage": "https://github.com/Ninowis/wordpress-theme-boilerplate#readme",
+  "devDependencies": {
+    "dotenv": "^7.0.0",
+    "gulp": "^4.0.1",
+    "gulp-zip": "^4.2.0"
+  }
+}

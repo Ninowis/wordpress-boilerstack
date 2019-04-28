@@ -1,0 +1,14 @@
+# Wordpress folders
+wp-content/
+
+# Development folders
+node_modules/
+dist/
+/src/*
+!/src/twentynineteen
+!/src/twentyseventeen
+.env
+package-lock.json
+
+# Dev IDEs
+.vscode/
