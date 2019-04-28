@@ -1,10 +1,16 @@
 var gulp = require('gulp');
+var run = require('gulp-run');
 var zip = require('gulp-zip');
 
 require('dotenv').config()
 
-var THEME_PATH = 'src/' + process.env.THEME_PATH;
+var THEME_PATH = process.env.THEME_PATH;
 var THEME_TEXT_DOMAIN = process.env.THEME_TEXT_DOMAIN;
+
+gulp.task('build', function() {
+  return run('cd ' + THEME_PATH + ' && npm run build').exec()
+  ;
+});
 
 gulp.task('zip', function() {
   return gulp.src([

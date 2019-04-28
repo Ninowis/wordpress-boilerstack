@@ -4,11 +4,16 @@
   "description": "A kick starter Wordpress theme development stack. Simple Docker setup with contained phpMyAdmin + full Gulp workflow and starter theme files.",
   "main": "index.js",
   "scripts": {
+    "build": "gulp build && npm run theme:zip",
+    "start": "npm run docker:build",
+    "watch": "npm run docker && npm run theme:watch",
     "docker": "docker-compose up -d",
+    "docker:build": "docker-compose up -d --build",
     "docker:down": "docker-compose down",
-    "docker:clear": "docker-compose down --volumes",
+    "docker:clear": "docker-compose down --volumes && rm -r ./wp-content/themes",
     "theme:zip": "gulp zip",
     "theme:update": "gulp update",
+    "theme:watch": "gulp update && gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +34,7 @@
   "devDependencies": {
     "dotenv": "^7.0.0",
     "gulp": "^4.0.1",
+    "gulp-run": "^1.7.1",
     "gulp-zip": "^4.2.0"
   }
 }
