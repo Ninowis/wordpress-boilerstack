@@ -4,16 +4,17 @@
   "description": "A kick starter Wordpress theme development stack. Simple Docker setup with contained phpMyAdmin + full Gulp workflow and starter theme files.",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build && npm run theme:zip",
-    "start": "npm run docker:build",
+    "build": "npm run theme:build && npm run theme:zip",
+    "start": "npm run theme:create && npm run theme:build && npm run docker",
     "watch": "npm run docker && npm run theme:watch",
     "docker": "docker-compose up -d",
-    "docker:build": "docker-compose up -d --build",
     "docker:down": "docker-compose down",
     "docker:clear": "docker-compose down --volumes && rm -r ./wp-content/themes",
-    "theme:zip": "gulp zip",
+    "theme:create": "gulp create",
+    "theme:build": "gulp build",
     "theme:update": "gulp update",
     "theme:watch": "gulp update && gulp watch",
+    "theme:zip": "gulp zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,10 +32,23 @@
     "url": "https://github.com/Ninowis/wordpress-theme-boilerplate/issues"
   },
   "homepage": "https://github.com/Ninowis/wordpress-theme-boilerplate#readme",
-  "devDependencies": {
+  "dependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "colors": "^1.4.0",
+    "copy-dir": "^1.2.0",
     "dotenv": "^7.0.0",
     "gulp": "^4.0.1",
+    "gulp-replace": "^1.0.0",
     "gulp-run": "^1.7.1",
     "gulp-zip": "^4.2.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
