@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run theme:build && npm run theme:zip",
-    "start": "npm run theme:create && npm run theme:build && npm run docker",
+    "start": "npm run theme:create && npm run build && npm run docker",
     "watch": "npm run docker && npm run theme:watch",
     "docker": "docker-compose up -d",
     "docker:down": "docker-compose down",
