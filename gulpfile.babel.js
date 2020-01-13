@@ -51,20 +51,19 @@ task('build', (done) => {
     }
     console.log('\n  > Compiling theme assets... '.green)
     exec('cd ' + THEME_PATH + ' && npm run build', (err, stdout, stderr) => {
-      console.log(stdout.yellow)
+      console.log(stdout)
       console.log(stderr.red)
-      if (err) {
-        console.log( err
-          ? '  > Error compiling theme: '.red + err.red
-          : '  > Theme assets compiled.\n'.green
-        )
-      }
+      console.log( err
+        ? '  > Error compiling theme: '.red + err.red
+        : '  > Theme assets compiled.\n'.green
+      )
       done(err)
     })
   })
 });
 
 task('zip', () => {
+  console.log('\n  Zipping '.green + THEME_NAME.yellow + ' theme...'.green)
   return src([
       THEME_PATH + '/**/*',
       '!' + THEME_PATH + '/node_modules{,/**}',
@@ -73,7 +72,10 @@ task('zip', () => {
       '!' + THEME_PATH + '/**/*.git',
     ])
     .pipe(zip(THEME_TEXT_DOMAIN + '.zip'))
-    .pipe(dest('dist'));
+    .pipe(dest('dist'))
+    .on('end', () => {
+      console.log('\n  > Theme built into '.green + 'dist/'.yellow + THEME_TEXT_DOMAIN.yellow + '.zip'.yellow + '.\n\n'.green)
+    })
 });
 
 task('update', () =>  {
