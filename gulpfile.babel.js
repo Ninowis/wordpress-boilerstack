@@ -35,32 +35,37 @@ task('create', (done) => {
         })
     })
   }
-});
+})
+
+function compile_theme (done) {
+  console.log('\n  > Compiling theme assets...\n'.green)
+
+  return exec('cd ' + THEME_PATH + ' && npm run build', (err, stdout, stderr) => {
+    console.log(stderr.red)
+    console.log(stdout)
+    console.log(err
+      ? '  > Error compiling theme:\n\n'.red + err.red
+      : '  > Theme assets compiled.\n'.green
+    )
+    done(err)
+  })
+}
 
 task('build', (done) => {
   console.log('\n  Building '.green + THEME_NAME.yellow + ' theme...'.green)
+
   console.log('\n  > Installing theme package dependencies...\n'.green)
+
   exec('cd ' + THEME_PATH + ' && npm install', (err, stdout, stderr) => {
-    console.log(stdout)
     console.log(stderr.red)
-    if (err) {
-      console.log( err
-        ? '  > Packages installed with error: '.red + err.red
-        : '\n  > Packages installed. '.green
-      )
-    }
-    console.log('\n  > Compiling theme assets... '.green)
-    exec('cd ' + THEME_PATH + ' && npm run build', (err, stdout, stderr) => {
-      console.log(stdout)
-      console.log(stderr.red)
-      console.log( err
-        ? '  > Error compiling theme: '.red + err.red
-        : '  > Theme assets compiled.\n'.green
-      )
-      done(err)
-    })
+    console.log(stdout)
+    console.log(err
+      ? '  > Packages installed with error: '.red + err.red
+      : '  > Packages installed. '.green
+    )
+    compile_theme(done)
   })
-});
+})
 
 task('zip', () => {
   console.log('\n  Zipping '.green + THEME_NAME.yellow + ' theme...'.green)
@@ -76,25 +81,32 @@ task('zip', () => {
     .on('end', () => {
       console.log('\n  > Theme built into '.green + 'dist/'.yellow + THEME_TEXT_DOMAIN.yellow + '.zip'.yellow + '.\n\n'.green)
     })
-});
+})
 
 task('update', () =>  {
   return src([
       THEME_PATH + '/**/*',
       '!' + THEME_PATH + '/node_modules{,/**}',
       '!' + THEME_PATH + '/sass{,/**}',
+      '!' + THEME_PATH + '/**/*.sass',
       '!' + THEME_PATH + '/**/*.scss',
       '!' + THEME_PATH + '/**/*.git',
     ])
     .pipe(dest('wp-content/themes/' + THEME_TEXT_DOMAIN));
-});
+})
 
 task('watch', () => {
+	watch([
+      THEME_PATH + '/**/*.sass',
+      THEME_PATH + '/**/*.scss'
+    ],
+    compile_theme
+  )
 	watch([
       THEME_PATH + '/**/*.css',
       THEME_PATH + '/**/*.js',
       THEME_PATH + '/**/*.php',
     ],
     task('update')
-  );
-});
+  )
+})
