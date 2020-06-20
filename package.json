@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ninowis/wordpress-theme-boilerplate.git"
+    "url": "git+https://github.com/Ninowis/wordpress-boilerstack.git"
   },
   "keywords": [
     "wordpress",
@@ -29,9 +29,9 @@
   "author": "Guillaume Simonin",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Ninowis/wordpress-theme-boilerplate/issues"
+    "url": "https://github.com/Ninowis/wordpress-boilerstack/issues"
   },
-  "homepage": "https://github.com/Ninowis/wordpress-theme-boilerplate#readme",
+  "homepage": "https://github.com/Ninowis/wordpress-boilerstack#readme",
   "dependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",

@@ -94,5 +94,7 @@ task('watch', () => {
       THEME_PATH + '/**/*.css',
       THEME_PATH + '/**/*.js',
       THEME_PATH + '/**/*.php',
-		], ['update']);
+    ],
+    task('update')
+  );
 });
