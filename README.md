@@ -27,15 +27,17 @@ Docker removes a lot of the setup hassle and makes it incredibly easy to get a c
 Install Docker from https://www.docker.com/get-started
 and Docker-Compose from https://docs.docker.com/compose/install/
 
-You will also need [Node.js](https://nodejs.org/) to run the scripts related to building your theme.
+You will also need [Node.js](https://nodejs.org/) to run the scripts related to building your theme (version <= 14 if starting a new theme from the default TwentyNineteen stack).
 
 ### Running Wordpress
 
-Wordpress docker image will be built with your theme when running `npm start`.
+Wordpress docker image will be built and run with your theme with any of those two commands:
+- `npm start` will create a new theme (if the one specified in your .env file doesn't exist) and start Docker
+- `npm run watch` will start Docker, build your existing theme and watch over your changes to .css, .js and .php files to update your theme within the Wordpress volume in Docker.
 
-You can also build and run the Wordpress image alone (without theme build) with `npm run docker` from the project directory.
+You can also build and run the Wordpress image alone (without theme build) with `npm run docker` from the project directory (equivalent to `docker compose up -d` if you're familiar with Docker).
 
-PhpMyAdmin will now be available at: http://localhost:8080/
+PhpMyAdmin will be available at: http://localhost:8080/
 
 And your website at: http://localhost:8000/
 (You'll be prompted to complete the Wordpress setup if this is your first run.)
@@ -67,7 +69,7 @@ Use the packaged .zip file to install as per normal Wordpress procedure (via the
 
 Note that the volume the theme is copied to is available to you under `wp-content/themes` and will persists even if you stop or remove your Docker containers.
 
-You can also simply run `npm run watch` to copy your theme and watch over your changes to .css, .js and .php files to update your theme within the Wordpress volume in Docker.
+You can also just run `npm run watch` when you start development to copy your theme and watch over your changes to .css, .js and .php files to update your theme within the Wordpress volume in Docker.
 
 
 ### Shutdown and cleanup
